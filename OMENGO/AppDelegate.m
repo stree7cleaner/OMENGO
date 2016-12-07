@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-
+#import "Navigator.h"
 @interface AppDelegate ()
 
 @end
@@ -17,6 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+
+    
+    //创建window
+    self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
+    [Navigator startLoading];
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 
