@@ -7,12 +7,27 @@
 //
 
 #import "OMMallViewController.h"
-#import "OMCycleADView.h"
+#import "OMMallBannerView.h"
+#import "OMMallCategoryTableCell.h"
+#import "OMMallRecommendTableCell.h"
+#import "OMMallADTableCell.h"
 @interface OMMallViewController ()
-
+@property (nonatomic, strong) OMMallCategoryTableCell *categoryCell;
+@property (nonatomic, strong) OMMallRecommendTableCell *recommendCell;
 @end
 
 @implementation OMMallViewController
+
+- (UIStatusBarStyle)preferredStatusBarStyle
+{
+    return UIStatusBarStyleLightContent;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -20,24 +35,54 @@
 
     self.fd_prefersNavigationBarHidden = YES;
 
-    OMCycleADView *adView = [[OMCycleADView alloc]initWithFrame:CGRectMake(0, 0, SM_SCREEN_WIDTH, SM_SIZE(350))];
-    [adView setImages:@[@"cycle_ad_00.jpg",@"cycle_ad_01.jpg"] IsLocal:YES];
-    self.tableView.tableHeaderView = adView;
+    OMMallBannerView *banner = [[OMMallBannerView alloc]initWithFrame:CGRectMake(0, 0, SM_SCREEN_WIDTH, SM_SIZE(350))];
+    [banner configureWithObject:@[@"cycle_ad_00.jpg",@"cycle_ad_01.jpg"] IsLocal:YES];
+    [banner.addressView setAddress:@"嘉信城市花园1期"];
+    self.tableView.tableHeaderView = banner;
+    self.tableView.sectionFooterHeight = SM_SIZE(15);
+    self.tableView.sectionHeaderHeight = SM_SIZE(1);
+
+    _categoryCell = [OMMallCategoryTableCell tableViewCellWithTableView:self.tableView];
+    _recommendCell = [OMMallRecommendTableCell tableViewCellWithTableView:self.tableView];
+
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 2;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+//    if (section == 2) {
+//        return 4;
+//    }
+    return 1;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:return self.categoryCell;
+        case 1:return self.recommendCell;
+        case 2:return [OMMallADTableCell tableViewCellWithTableView:tableView];
+    }
+    return nil;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    switch (indexPath.section) {
+        case 0:return [OMMallCategoryTableCell cellHeight];
+        case 1:return [OMMallRecommendTableCell cellHeight];
+        case 2:return [OMMallADTableCell cellHeight];
+    }
+    return [OMMallCategoryTableCell cellHeight];
+}
+
+
+
+
 
 @end

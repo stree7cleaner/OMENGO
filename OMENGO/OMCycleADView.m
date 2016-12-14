@@ -236,7 +236,7 @@
     OMCycleADCollectCell *cell  = [OMCycleADCollectCell collectCellWithCollectionView:collectionView atIndexPath:indexPath];
     NSString *imageStr          = [self.images[indexPath.item] imageStr];
     if (_isLocal) {
-        cell.imageView.image    = SMImage((imageStr?imageStr:@""), @"");
+        cell.imageView.image    = [UIImage imageNamed:imageStr];
     }else {
         [cell.imageView kt_imageWithURLStr:imageStr placeHolder:nil withSize:self.frame.size];
     }
