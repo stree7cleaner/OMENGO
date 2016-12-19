@@ -9,5 +9,5 @@
 #import "BaseModel.h"
 
 @implementation BaseModel
-
++ (NSArray *)fakeData {return nil;}
 @end

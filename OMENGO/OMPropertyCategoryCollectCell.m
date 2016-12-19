@@ -1,13 +1,15 @@
 //
-//  OMMallCategoryCollectCell.m
+//  OMPropertyCategoryCollectCell.m
 //  OMENGO
 //
-//  Created by 梁尚嘉 on 2016/12/9.
+//  Created by 梁尚嘉 on 2016/12/15.
 //  Copyright © 2016年 Kamfat. All rights reserved.
 //
 
-#import "OMMallCategoryCollectCell.h"
-@implementation OMMallCategoryCollectCell
+#import "OMPropertyCategoryCollectCell.h"
+
+@implementation OMPropertyCategoryCollectCell
+
 
 - (void)configure
 {
@@ -19,7 +21,7 @@
 - (void)makeConstraints
 {
 
-    
+
     UIView *containView =[UIView new];
     [self.contentView addSubview:containView];
     [containView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -30,11 +32,12 @@
     [containView addSubview:self.imageView];
     [containView addSubview:self.label];
 
-//    containView.backgroundColor = SM_orangeColor;
+//    containView.backgroundColor = SM_lightBlueColor;
+//    self.imageView.backgroundColor = SM_grayColor;
 
     [self.imageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.left.right.equalTo(@0);
-        make.width.height.equalTo(@(OMMallCategoryCollectCell_size*.5));
+        make.width.height.equalTo(@(OMPropertyCategoryCollectCell_size*.5111));
     }];
 
     [self.label mas_makeConstraints:^(MASConstraintMaker *make) {

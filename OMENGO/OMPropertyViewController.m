@@ -7,31 +7,53 @@
 //
 
 #import "OMPropertyViewController.h"
-
+#import "OMPropertyCategoryTableCell.h"
 @interface OMPropertyViewController ()
 
 @end
 
 @implementation OMPropertyViewController
 
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent animated:NO];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+
+    self.fd_prefersNavigationBarHidden = YES;
+
+    UIImageView *imageView = [[UIImageView alloc]initWithImage:SMImage(@"01-banner.png", @"")];
+    [imageView setFrame:CGRectMake(0, 0, SM_SCREEN_WIDTH, SM_SCREEN_WIDTH*5.f/12)];
+    self.tableView.tableHeaderView = imageView;
+
+
+
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return 1;
 }
-*/
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    OMPropertyCategoryTableCell *cell = [OMPropertyCategoryTableCell tableViewCellWithTableView:tableView];
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return [OMPropertyCategoryTableCell cellHeight];
+}
+
 
 @end

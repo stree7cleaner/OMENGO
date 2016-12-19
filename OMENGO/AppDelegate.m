@@ -18,6 +18,7 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
 
+    sleep(2);
     
     //创建window
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];

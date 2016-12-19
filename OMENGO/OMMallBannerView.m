@@ -13,6 +13,7 @@
 @property (nonatomic, strong) OMCycleADView *adView;
 @property (nonatomic, strong) OMPageControl *pageControl;
 @property (nonatomic, strong) OMAddressView *addressView;
+@property (nonatomic, strong) UIImageView *mask;
 
 @end
 
@@ -33,11 +34,16 @@
     [self addSubview:self.adView];
     [self addSubview:self.pageControl];
     [self addSubview:self.addressView];
+    [self addSubview:self.mask];
 
     [self.addressView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(@(SM_SIZE(50)));
         make.centerX.equalTo(self.mas_centerX);
         make.height.equalTo(@(SM_SIZE(50)));
+    }];
+    [self.mask mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(@.5);
+        make.left.right.equalTo(@0);
     }];
 }
 
@@ -50,6 +56,7 @@
     frame.origin.x = self.frame.size.width - frame.size.width - SM_SIZE(30);
     frame.origin.y = self.frame.size.height - frame.size.height - SM_SIZE(30);
     self.pageControl.frame = frame;
+    self.pageControl.center = CGPointMake(self.center.x, self.pageControl.center.y);
 }
 
 
@@ -61,6 +68,14 @@
                                               CurrentIndicatorImage:[SMPNGImage(@"ic_indicator_hl") imageWithColor:SM_thumeColor]];
     }
     return _pageControl;
+}
+
+- (UIImageView *)mask
+{
+    if (!_mask) {
+        _mask = [[UIImageView alloc]initWithImage:SMPNGImage(@"ic_mall_banner_mask")];
+    }
+    return _mask;
 }
 
 - (OMCycleADView *)adView

@@ -601,8 +601,8 @@ BOOL isAnimating = NO;
 {
     UILabel *label = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, SM_SCREEN_WIDTH, self.tableView.sectionHeaderHeight)];
     label.font = SM_CFont(29);
-    label.textColor = SM_whiteColor;
-    label.backgroundColor = SM_thumeColor;
+    label.textColor = SM_grayColor;
+    label.backgroundColor = HEXCOLOR(@"#F7F7F7");
     label.text = [@"  " stringByAppendingString: [self.categorys[section] allKeys][0]] ;
     return label;
 }
@@ -664,13 +664,14 @@ BOOL isAnimating = NO;
 - (void)didClickPlusButton:(UIButton *)button
 {
     CGPoint generatePoint = [button.superview convertPoint:button.center toView:self.view];
-    CGPoint middlePoint = CGPointMake(generatePoint.x-SM_SIZE(100), generatePoint.y-SM_SIZE(60));
+    CGPoint middlePoint = CGPointMake(generatePoint.x-SM_SIZE(200), generatePoint.y-SM_SIZE(200));
     CGPoint distinatePoint = self.shopCartButton.center;
 
     UIBezierPath *path = [UIBezierPath bezierPath];
     [path moveToPoint:generatePoint];
-    [path addQuadCurveToPoint:middlePoint controlPoint:CGPointMake((generatePoint.x+middlePoint.x)/2.f, (generatePoint.y+middlePoint.y)/3.f)];
-    [path addQuadCurveToPoint:distinatePoint controlPoint:CGPointMake((distinatePoint.x+middlePoint.x)/3.f, (distinatePoint.y+middlePoint.y)/3)];
+    [path addQuadCurveToPoint:distinatePoint controlPoint:middlePoint];
+//    [path addQuadCurveToPoint:middlePoint controlPoint:CGPointMake((generatePoint.x+middlePoint.x)/2.f, (generatePoint.y+middlePoint.y)/3.f)];
+//    [path addQuadCurveToPoint:distinatePoint controlPoint:CGPointMake((distinatePoint.x+middlePoint.x)/3.f, (distinatePoint.y+middlePoint.y)/3)];
 
     CAShapeLayer *dot   = [CAShapeLayer layer];
     CGFloat width       = SM_SIZE(30);
@@ -681,7 +682,7 @@ BOOL isAnimating = NO;
     dot.masksToBounds   = YES;
     [self.view.layer insertSublayer:dot below:self.shopCartButton.layer];
 
-    double duration                 = .8f;
+    double duration                 = .5f;
     CAKeyframeAnimation *animation  = [CAKeyframeAnimation animationWithKeyPath:@"position"];
     animation.path                  = path.CGPath;
     animation.duration              = duration;
@@ -695,7 +696,7 @@ BOOL isAnimating = NO;
         scaleAnimation.fromValue         = @(1);
         scaleAnimation.toValue           = @(1.1);
         scaleAnimation.autoreverses      = YES;
-        scaleAnimation.duration          = .2;
+        scaleAnimation.duration          = .1;
         scaleAnimation.timingFunction        = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
         [self.shopCartButton.layer addAnimation:scaleAnimation forKey:nil];
     });

@@ -93,7 +93,7 @@
     flowLayout.minimumLineSpacing = 0;
     //item大小
     float itemSize = OMMallCategoryCollectCell_size;
-    flowLayout.itemSize = CGSizeMake(itemSize, itemSize*1.2);
+    flowLayout.itemSize = CGSizeMake(itemSize, itemSize*1);
     flowLayout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
 
     return flowLayout;
@@ -126,7 +126,7 @@
 
 + (CGFloat)cellHeight
 {
-    return OMMallCategoryCollectCell_size*2*1.2;
+    return OMMallCategoryCollectCell_size*2*1;
 }
 
 @end

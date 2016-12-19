@@ -9,5 +9,5 @@
 #import <Foundation/Foundation.h>
 #import <MJExtension.h>
 @interface BaseModel : NSObject
-
++ (NSArray *)fakeData;
 @end
